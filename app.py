@@ -3,7 +3,10 @@ from flask import Flask,Response
 from flask import request
 import os
 import requests
+from dotenv import load_dotenv
 
+load_dotenv()
+***REMOVED***os.getenv("ACCESS_TOKEN")
 app = Flask(__name__)
 
 @app.route("/")
@@ -21,7 +24,7 @@ def privacy_policy():
 
 @app.route("/webhook",methods=['GET','POST'])
 def webhook():
-    ***REMOVED***"***REMOVED***REMOVED"
+    
     if request.method == 'POST':
         try:
             response = request.get_json()
