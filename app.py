@@ -22,29 +22,46 @@ def privacy_policy():
 @app.route("/webhook",methods=['GET','POST'])
 def webhook():
     ***REMOVED***"***REMOVED***REMOVED"
-    if request.method=='POST':
-        response = request.get_json()
-        if(response['entry'][0]['changes'][0]['field']=='comments'):
-            url = f"https://graph.instagram.com/v23.0/me/messages"
-            headers = {
-                "Authorization" : ***REMOVED***,
-                "Content-Type" : "application/json"
-            }
-            payload = {
-                "recipient" :{
-                    "id" : response['entry'][0]['changes'][0]['value']['from']['id']
-                },
-                "message" : {
-                    'text' : "Thanks for the comment"
-                }
-            }  
-            response1 = requests.post(url,headers=headers,json=payload)
-                 
+    if request.method == 'POST':
         try:
-            print(json.dumps(request.get_json(force=True),indent=2),flush=True)
-        except:
-            pass
-        return "This is a POST Request, Hello Webhook!"
+            response = request.get_json()
+            print(json.dumps(response, indent=2), flush=True)
+
+            
+            if (
+                'entry' in response and
+                'changes' in response['entry'][0] and
+                response['entry'][0]['changes'][0]['field'] == 'comments'
+            ):
+                comment_data = response['entry'][0]['changes'][0]['value']
+                commenter_id = comment_data['from']['id']
+                comment_text = comment_data['text'].strip().lower()
+
+                
+                keyword = "done"
+
+                if comment_text == keyword:
+                    url = "https://graph.instagram.com/v23.0/me/messages" 
+                    headers = {
+                        "Authorization": ***REMOVED***,
+                        "Content-Type": "application/json"
+                    }
+                    payload = {
+                        "recipient": {
+                            "id": commenter_id
+                        },
+                        "message": {
+                            "text": "Thanks for saying done 😊"
+                        }
+                    }
+
+                    res = requests.post(url, headers=headers, json=payload)
+                    print("DM Status:", res.status_code, res.text, flush=True)
+
+        except Exception as e:
+            print("Error:", e, flush=True)
+
+        return "This is a POST Request, Hello Webhook!", 200
     elif request.method=='GET':
         hub_mode = request.args.get("hub.mode")
         hub_challenge = request.args.get("hub.challenge")
