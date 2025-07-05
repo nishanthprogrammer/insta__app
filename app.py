@@ -22,7 +22,7 @@ def privacy_policy():
 def webhook():
     if request.method=='POST':
         try:
-            print(json.dumps(request.get_json(),indent=2))
+            print(json.dumps(request.get_json(force=True),indent=2),flush=True)
         except:
             pass
         return "This is a POST Request, Hello Webhook!"
