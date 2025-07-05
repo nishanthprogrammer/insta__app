@@ -30,6 +30,12 @@ This Flask app listens for Instagram comment webhooks and sends an automated Dir
 4. Deploy to Render
 
 ---
+⚠️ **Important Consent Note**:  
+ Instagram only allows your app to send a DM if the user has **messaged your business account** first.  
+If they haven’t, the API returns:  
+`"User consent is required to access user profile."`
+![image](https://github.com/user-attachments/assets/ce7d3394-9c29-47db-b6d2-a6868a1d0e8f)
+ref : [link]https://developers.facebook.com/docs/instagram-platform/instagram-api-with-instagram-login/messaging-api
 
 🧠 Author
 
