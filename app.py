@@ -5,8 +5,10 @@ import os
 import requests
 from dotenv import load_dotenv
 
+
 load_dotenv()
-***REMOVED***os.getenv("ACCESS_TOKEN")
+access_token = os.getenv("ACCESS_TOKEN")
+
 app = Flask(__name__)
 
 @app.route("/")
@@ -46,7 +48,8 @@ def webhook():
                 if comment_text == keyword:
                     url = "https://graph.instagram.com/v23.0/me/messages" 
                     headers = {
-                        "Authorization": ***REMOVED***,
+                        "Authorization": f"Bearer {access_token}",
+
                         "Content-Type": "application/json"
                     }
                     payload = {
