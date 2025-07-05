@@ -2,6 +2,7 @@ import json
 from flask import Flask,Response
 from flask import request
 import os
+import requests
 
 app = Flask(__name__)
 
@@ -23,7 +24,7 @@ def webhook():
     ***REMOVED***"***REMOVED***REMOVED"
     if request.method=='POST':
         response = request.get_json()
-        if(response['entry'][0]['field']=='comments'):
+        if(response['entry'][0]['changes'][0]['field']=='comments'):
             url = f"https://graph.instagram.com/v23.0/me/messages"
             headers = {
                 "Authorization" : ***REMOVED***,
@@ -37,7 +38,7 @@ def webhook():
                     'text' : "Thanks for the comment"
                 }
             }  
-            response1 = request.post(url,headers=headers,json=payload)
+            response1 = requests.post(url,headers=headers,json=payload)
                  
         try:
             print(json.dumps(request.get_json(force=True),indent=2),flush=True)
