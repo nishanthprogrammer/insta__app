@@ -20,7 +20,25 @@ def privacy_policy():
 
 @app.route("/webhook",methods=['GET','POST'])
 def webhook():
+    ***REMOVED***"***REMOVED***REMOVED"
     if request.method=='POST':
+        response = request.get_json()
+        if(response['entry'][0]['field']=='comments'):
+            url = f"https://graph.instagram.com/v23.0/me/messages"
+            headers = {
+                "Authorization" : ***REMOVED***,
+                "Content-Type" : "application/json"
+            }
+            payload = {
+                "recipient" :{
+                    "id" : response['entry'][0]['changes'][0]['value']['from']['id']
+                },
+                "message" : {
+                    'text' : "Thanks for the comment"
+                }
+            }  
+            response1 = request.post(url,headers=headers,json=payload)
+                 
         try:
             print(json.dumps(request.get_json(force=True),indent=2),flush=True)
         except:
