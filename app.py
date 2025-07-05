@@ -22,18 +22,9 @@ def privacy_policy():
 def webhook():
     if request.method=='POST':
         try:
-            print("\n=== HEADERS ===")
-            print(dict(request.headers))
-
-            print("\n=== RAW DATA ===")
-            print(request.data)  # raw bytes
-
-            print("\n=== JSON ===")
-            print(json.dumps(request.get_json(force=True), indent=2))  # try force
-
-        except Exception as e:
-            print("⚠️ Error reading webhook payload:", e)
-
+            print(json.dumps(request.get_json(),indent=2))
+        except:
+            pass
         return "This is a POST Request, Hello Webhook!"
     elif request.method=='GET':
         hub_mode = request.args.get("hub.mode")
