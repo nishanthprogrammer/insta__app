@@ -26,7 +26,7 @@ This Flask app listens for Instagram comment webhooks and sends an automated Dir
 
 1. Clone repo
 2. Install with `pipenv install`
-3. Add your `access_token` in `app.py`
+3. Add your 'access_token' in env in deployment(in my case it is render)
 4. Deploy to Render
 
 ---
