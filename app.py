@@ -10,7 +10,7 @@ def home():
 
 @app.route("/privacy_policy")
 def privacy_policy():
-    with open("D:\SDE\INSTAGRAM AUTOMATION PROJECT\insta_app\privacy_policy.html","rb") as file:
+    with open(r"D:\SDE\INSTAGRAM AUTOMATION PROJECT\insta_app\privacy_policy.html","rb") as file:
         privacy_policy_html = file.read()
         return privacy_policy_html
     
